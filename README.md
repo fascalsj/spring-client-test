@@ -23,7 +23,7 @@ maven 3.6.x or higher
           └── client                              * Our client test files
               └── StoreClientServiceTest.java     * Our service test files
 ```
-Note : If you want to test the rest client, you can't put the new instance you need to make it dependency injection, in this application using autowired
+Note : If you want to test the rest client, you just can put the Resttemplate declaration as global variable to test it.
 
 ## Run the Test
 ```

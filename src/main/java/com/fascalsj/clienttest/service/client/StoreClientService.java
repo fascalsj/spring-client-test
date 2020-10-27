@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,9 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Slf4j
 public class StoreClientService {
-
-    @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public ResponseEntity<StoreDto> createOrder(StoreDto storeDto) throws JsonProcessingException {
         String url = "https://petstore.swagger.io/v2/store/order";
@@ -31,8 +28,7 @@ public class StoreClientService {
 
         HttpEntity<StoreDto> requestEntity =
                 new HttpEntity<>(storeDto, headers);
-        ResponseEntity<StoreDto> exchange = restTemplate.exchange("https://petstore.swagger.io/v2/store/order", HttpMethod.POST, requestEntity,
-                StoreDto.class);
+        ResponseEntity<StoreDto> exchange = restTemplate.exchange("https://petstore.swagger.io/v2/store/order", HttpMethod.POST, requestEntity, StoreDto.class);
 
         log.info("== RESPONSE ==");
         log.info("Response Header : " + exchange.getHeaders());
